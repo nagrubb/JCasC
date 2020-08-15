@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+git clean -fdx
 mkdir -p jenkins_home
 
 if [[ "${OSTYPE:0:6}" == "darwin" || "${OSTYPE:0:5}" == "linux" ]]; then
@@ -17,4 +18,6 @@ export GH_PASSWORD
 
 cat jenkins.yaml.template | envsubst > jenkins.yaml
 cat docker-compose.yaml.template | envsubst > docker-compose.yaml
-exit 0
+docker-compose build
+docker-compose up -d
+docker logs jcasc_jenkins_1 -f

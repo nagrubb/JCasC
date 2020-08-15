@@ -1,27 +1,7 @@
 jenkins:
-  markupFormatter:
-    rawHtml:
-      disableSyntaxHighlighting: false
   systemMessage: Jenkins configuration managed by JCasC
+  labelString: "OnlyUseForSeedJob"
   numExecutors: 1
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-          - usernamePassword:
-              scope: GLOBAL
-              id: git
-              username: "${GH_USERNAME}"
-              password: "${GH_PASSWORD}"
-unclassified:
-  simple-theme-plugin:
-    elements:
-    - cssUrl:
-        url: "https://cdn.rawgit.com/afonsof/jenkins-material-theme/gh-pages/dist/material-grey.css"
-  timestamperConfig:
-    allPipelines: true
-    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
-    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
 jobs:
   - script: >
       job('seed-job') {
@@ -34,7 +14,6 @@ jobs:
             remote {
               name('origin')
               url('https://github.com/silent-snowman/JCasC.git')
-              credentials('git')
             }
           }
         }
