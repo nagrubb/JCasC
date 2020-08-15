@@ -6,3 +6,4 @@ pipelineJob('Machines') {
       script(readFileFromWorkspace('machines/linux.groovy'))
     }
   }
+}
