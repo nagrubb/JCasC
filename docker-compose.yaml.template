@@ -1,0 +1,23 @@
+version: "2"
+services:
+  jenkins:
+    user: root
+    build: .
+    ports:
+      - "8000:8000"
+      - "50000:50000"
+    volumes:
+      # Jenkins Configuration as Code YAML
+      - ${PWD}/jenkins.yaml:/opt/jenkins/jenkins.yaml:ro
+      # ephemeral volume - job workspace
+      - ${PWD}/jenkins_home:/var/jenkins_home
+      # map the docker socket in so that jenkins can spawn new docker containers to run jobs
+      - ${DOCKER_SOCK}:/var/run/docker.sock
+    environment:
+      - JENKINS_OPTS=--httpPort=8000
+      - CASC_JENKINS_CONFIG=/opt/jenkins/jenkins.yaml
+      - https_proxy=
+      - http_proxy=
+volumes:
+  jenkins_home:
+  jenkins.yaml:

@@ -1,0 +1,51 @@
+jenkins:
+  markupFormatter:
+    rawHtml:
+      disableSyntaxHighlighting: false
+  systemMessage: Jenkins configuration managed by JCasC
+  numExecutors: 1
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: git
+              username: "${GH_USERNAME}"
+              password: "${GH_PASSWORD}"
+unclassified:
+  simple-theme-plugin:
+    elements:
+    - cssUrl:
+        url: "https://cdn.rawgit.com/afonsof/jenkins-material-theme/gh-pages/dist/material-grey.css"
+  timestamperConfig:
+    allPipelines: true
+    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+jobs:
+  - script: >
+      job('seed-job') {
+        displayName('..Seed Job')
+        description('This Job creates everything else by executing these scripts: https://git.taservs.net/jenkins/devices/jobs/*.groovy')
+        label('OnlyUseForSeedJob')
+        scm {
+          git {
+            branch('master')
+            remote {
+              name('origin')
+              url('https://github.com/silent-snowman/JCasC.git')
+              credentials('git')
+            }
+          }
+        }
+        steps {
+          dsl {
+            external('machines/*.groovy')
+            removeAction('DISABLE')
+            removeViewAction('DELETE')
+          }
+        }
+        triggers {
+          scm('@hourly')
+        }
+      }
