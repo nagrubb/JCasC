@@ -12,14 +12,14 @@ jobs:
           git {
             branch('master')
             remote {
-              name('origin')
+              name('ngrubb/job-dsl')
               url('https://github.com/silent-snowman/JCasC.git')
             }
           }
         }
         steps {
           dsl {
-            external('machines/*.groovy')
+            external('jobs/*.groovy')
             removeAction('DISABLE')
             removeViewAction('DELETE')
           }

@@ -9,12 +9,12 @@ else
   exit 1
 fi
 
-read -p "Enter GitHub Username: "  TVS_USERNAME
-read -s -p "Enter GitHub Password: " TVS_PASSWORD
+#read -p "Enter GitHub Username: "  TVS_USERNAME
+#read -s -p "Enter GitHub Password: " TVS_PASSWORD
 echo
 
-export GH_USERNAME
-export GH_PASSWORD
+#export GH_USERNAME
+#export GH_PASSWORD
 
 cat jenkins.yaml.template | envsubst > jenkins.yaml
 cat docker-compose.yaml.template | envsubst > docker-compose.yaml
