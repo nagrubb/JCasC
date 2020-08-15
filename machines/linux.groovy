@@ -3,12 +3,7 @@ import com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl
 import com.cloudbees.plugins.credentials.*
 import com.cloudbees.plugins.credentials.domains.Domain
 import hudson.model.*
-import hudson.plugins.ec2.AmazonEC2Cloud
-import hudson.plugins.ec2.AMITypeData
-import hudson.plugins.ec2.EC2Tag
-import hudson.plugins.ec2.SlaveTemplate
-import hudson.plugins.ec2.SpotConfiguration
-import hudson.plugins.ec2.UnixData
+import hudson.plugins.ec2.*
 import jenkins.model.Jenkins
 
 // parameters
