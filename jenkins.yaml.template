@@ -10,9 +10,9 @@ jobs:
         label('OnlyUseForSeedJob')
         scm {
           git {
-            branch('master')
+            branch('ngrubb/job-dsl')
             remote {
-              name('ngrubb/job-dsl')
+              name('origin')
               url('https://github.com/silent-snowman/JCasC.git')
             }
           }
